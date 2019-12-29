@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
 import fire from './fire'
-import BookForm from './Components/BookForm'
-import Books from './Components/Books'
+import ProductForm from './Components/ProductForm'
+import Products from './Components/Products'
 
 const App = () => {
   const [messages, setMessages] = useState([])
   const [newMessage, setNewMessage] = useState('')
-  
+  const [page, setPage] = useState('products')
+  console.log('page', page)
+
 
   useEffect(() => {
     let messagesRef = fire.database().ref('messages').orderByKey().limitToLast(100)
@@ -28,10 +30,23 @@ const App = () => {
 
   return (
     <div className="App">
-      <h2>Johtaja appsi</h2>
+      <div>
+        <button onClick={() => setPage('products')}>Products</button>
+        <button onClick={() => setPage('productform')}>Product form</button>
+      </div>
+      <h2>Old School Shop</h2>
+
+      <Products show={page === 'products'} />
+      <ProductForm show={page === 'productform'}  />
+
+      <h3>Messages</h3>
+        <ul>
+          { messages.map( message => <li key={message.id}>{message.text}</li> ) }
+        </ul>
+
       <form onSubmit={AddMessage}>
         <div>
-          Message
+          Add message
           <input
             type="text"
             value={newMessage}
@@ -39,15 +54,11 @@ const App = () => {
           />
         </div>
         <input type="submit" value="Save"/>
-        <h3>Messages</h3>
-        <ul>
-          { messages.map( message => <li key={message.id}>{message.text}</li> ) }
-        </ul>
+        
       </form>
-      <BookForm />
-      <Books />
+      
     </div>
-  );
+  )
 }
 
 export default App;
