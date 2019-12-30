@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from 'react'
+
 import './App.css'
 import fire from './fire'
-import ProductForm from './Components/ProductForm'
-import Products from './Components/Products'
+import ProductForm from './components/ProductForm'
+import Products from './components/Products'
 
-const App = () => {
+import NewNote from './components/NewNote'
+import Notes from './components/Notes'
+import { connect } from 'react-redux'
+import { initializeNotes } from './reducers/noteReducer'
+
+const App = (props) => {
+
   const [messages, setMessages] = useState([])
   const [newMessage, setNewMessage] = useState('')
   const [page, setPage] = useState('products')
   console.log('page', page)
+
+  useEffect(() => {
+    props.initializeNotes()
+  }, [])
 
 
   useEffect(() => {
@@ -22,9 +33,9 @@ const App = () => {
   }, [])
 
   const AddMessage = (e) => {
-    e.preventDefault(); // <- prevent form submit from reloading the page
+    e.preventDefault() // <- prevent form submit from reloading the page
     /* Send the message to Firebase */
-    fire.database().ref('messages').push( newMessage );
+    fire.database().ref('messages').push( newMessage )
     setNewMessage('') // <- clear the input
   }
 
@@ -40,9 +51,9 @@ const App = () => {
       <ProductForm show={page === 'productform'}  />
 
       <h3>Messages</h3>
-        <ul>
-          { messages.map( message => <li key={message.id}>{message.text}</li> ) }
-        </ul>
+      <ul>
+        { messages.map( message => <li key={message.id}>{message.text}</li> ) }
+      </ul>
 
       <form onSubmit={AddMessage}>
         <div>
@@ -54,11 +65,18 @@ const App = () => {
           />
         </div>
         <input type="submit" value="Save"/>
-        
       </form>
-      
+
+      <div>
+        <NewNote />
+        <Notes />
+      </div>
     </div>
   )
 }
 
-export default App;
+export default connect(
+  null, { initializeNotes }
+)(App)
+
+
