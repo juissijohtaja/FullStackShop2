@@ -1,3 +1,5 @@
+Full Stack Websovelluskehitys - Harjoitustyö
+
 Sovellus:
 https://oldschoolshopapp.firebaseapp.com/
 
