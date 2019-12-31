@@ -6,37 +6,40 @@ import ProductForm from './components/ProductForm'
 import Products from './components/Products'
 
 import NewNote from './components/NewNote'
-import Notes from './components/Notes'
+//import Notes from './components/Notes'
 import { connect } from 'react-redux'
 import { initializeNotes } from './reducers/noteReducer'
+import { fetchMessages } from './reducers/messageReducer'
+
 
 const App = (props) => {
 
-  const [messages, setMessages] = useState([])
+  const [messages2, setMessages2] = useState([])
   const [newMessage, setNewMessage] = useState('')
   const [page, setPage] = useState('products')
   console.log('page', page)
 
   useEffect(() => {
-    props.initializeNotes()
+    props.fetchMessages()
   }, [])
 
-
-  useEffect(() => {
-    let messagesRef = fire.database().ref('messages').orderByKey().limitToLast(100)
-    messagesRef.on('child_added', snapshot => {
-      /* Update React state when message is added at Firebase Database */
-      let message = { text: snapshot.val(), id: snapshot.key }
-      console.log('message', message)
-      setMessages(messages => [...messages, message])
-    })
-  }, [])
+  console.log('App props', props.messages)
 
   const AddMessage = (e) => {
     e.preventDefault() // <- prevent form submit from reloading the page
     /* Send the message to Firebase */
     fire.database().ref('messages').push( newMessage )
     setNewMessage('') // <- clear the input
+  }
+
+  const MessageContent = () => {
+
+    return (
+      <ul>
+        {props.messages.map(message => <li key={message.id}>{message.text}</li>)}
+      </ul>
+    )
+
   }
 
   return (
@@ -49,11 +52,6 @@ const App = (props) => {
 
       <Products show={page === 'products'} />
       <ProductForm show={page === 'productform'}  />
-
-      <h3>Messages</h3>
-      <ul>
-        { messages.map( message => <li key={message.id}>{message.text}</li> ) }
-      </ul>
 
       <form onSubmit={AddMessage}>
         <div>
@@ -68,15 +66,22 @@ const App = (props) => {
       </form>
 
       <div>
-        <NewNote />
-        <Notes />
+        <h3>Messages Redux</h3>
+        <ul>
+          {props.messages.map(message => <li key={message.id}>{message.text}</li>)}
+        </ul>
       </div>
     </div>
   )
 }
 
+const mapStateToProps = (state) => {
+  return {
+    messages: state.messages
+  }
+}
 export default connect(
-  null, { initializeNotes }
+  mapStateToProps, { initializeNotes, fetchMessages }
 )(App)
 
 

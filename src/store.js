@@ -4,10 +4,13 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 
 import noteReducer from './reducers/noteReducer'
 import productReducer from './reducers/productReducer'
+import messageReducer from './reducers/messageReducer'
+
 
 const reducer = combineReducers({
   notes: noteReducer,
-  product: productReducer
+  products: productReducer,
+  messages: messageReducer
 })
 
 const store = createStore(

@@ -11,7 +11,7 @@ const BookForm = (props) => {
   //let booksRef = fire.database().ref('books').orderByKey().limitToLast(100)
 
   const AddBook = (e) => {
-    e.preventDefault(); // <- prevent form submit from reloading the page
+    e.preventDefault() // <- prevent form submit from reloading the page
 
     if (title && published && author) {
       const newBook = { title, published, author, genres }
@@ -27,7 +27,7 @@ const BookForm = (props) => {
       setGenre('')
 
     } else {
-      alert("Error: title, author or year missing")
+      alert('Error: title, author or year missing')
     }
   }
 

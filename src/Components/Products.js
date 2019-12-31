@@ -4,19 +4,17 @@ import fire from '../fire'
 const Products = ({ show }) => {
   const [products, setProducts] = useState([])
 
-  
-
   useEffect(() => {
     let productsRef = fire.database().ref('products').orderByKey().limitToLast(100)
     productsRef.on('child_added', snapshot => {
       /* Update React state when message is added at Firebase Database */
-      let product = { 
-          name: snapshot.val().name, 
-          description: snapshot.val().description,
-          price: snapshot.val().price,
-          category: snapshot.val().category,
-          id: snapshot.key
-        }
+      let product = {
+        name: snapshot.val().name,
+        description: snapshot.val().description,
+        price: snapshot.val().price,
+        category: snapshot.val().category,
+        id: snapshot.key
+      }
       console.log('product', product)
       setProducts(products => [...products, product])
     })
@@ -25,7 +23,7 @@ const Products = ({ show }) => {
   if (!show) {
     return null
   }
-  
+
 
   return (
     <div>

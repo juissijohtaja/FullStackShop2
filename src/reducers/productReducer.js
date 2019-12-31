@@ -5,8 +5,12 @@ const productReducer = (state = [], action) => {
   console.log('action', action)
 
   switch (action.type) {
-    default:
-      return state
+  case 'NEW_PRODUCT':
+    return [...state, action.data]
+  case 'INIT_PRODUCTS':
+    return action.data
+  default:
+    return state
   }
 }
 
@@ -14,7 +18,7 @@ export const initializeProducts = () => {
   return async dispatch => {
     //const notes = await noteService.getAll()
     dispatch({
-      type: 'INIT_NOTES',
+      type: 'INIT_PRODUCTS',
       data: null,
     })
   }
@@ -22,11 +26,11 @@ export const initializeProducts = () => {
 
 //const generateId = () => Number((Math.random() * 1000000).toFixed(0))
 
-export const createNote = content => {
+export const createProduct = content => {
   return async dispatch => {
     //const newNote = await noteService.createNew(content)
     dispatch({
-      type: 'NEW_NOTE',
+      type: 'NEW_PRODUCT',
       data: null,
     })
   }

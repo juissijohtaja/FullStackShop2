@@ -8,18 +8,18 @@ const Books = () => {
     let booksRef = fire.database().ref('books').orderByKey().limitToLast(100)
     booksRef.on('child_added', snapshot => {
       /* Update React state when message is added at Firebase Database */
-      let book = { 
-          title: snapshot.val().title, 
-          author: snapshot.val().author,
-          published: snapshot.val().published,
-          genres: snapshot.val().genres,
-          id: snapshot.key 
-        }
+      let book = {
+        title: snapshot.val().title,
+        author: snapshot.val().author,
+        published: snapshot.val().published,
+        genres: snapshot.val().genres,
+        id: snapshot.key
+      }
       console.log('book', book)
       setBooks(books => [...books, book])
     })
   }, [])
-  
+
 
   return (
     <div>

@@ -14,7 +14,7 @@ const ProductForm = (props) => {
   //let booksRef = fire.database().ref('books').orderByKey().limitToLast(100)
 
   const AddProduct = (e) => {
-    e.preventDefault(); // <- prevent form submit from reloading the page
+    e.preventDefault() // <- prevent form submit from reloading the page
 
     if (name && description && price) {
       const newProduct = { name, description, price, category }
@@ -29,7 +29,7 @@ const ProductForm = (props) => {
       setCategory('')
 
     } else {
-      alert("Error: name, description or price missing")
+      alert('Error: name, description or price missing')
     }
   }
 
