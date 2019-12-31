@@ -12,12 +12,10 @@ module.exports = {
             "jsx": true
         },
         "ecmaVersion": 2018,
-        "sourceType": "module",
-        "allowImportExportEverywhere": true,
+        "sourceType": "module"
     },
     "plugins": [
-        "react",
-        "react-hooks"
+        "react", "react-hooks"
     ],
     "rules": {
         "indent": [
@@ -46,7 +44,6 @@ module.exports = {
         ],
         "no-console": 0,
         "react/prop-types": 0,
-        "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "warn" // Checks effect dependencies
+        "react-hooks/rules-of-hooks": "error"
     }
 };

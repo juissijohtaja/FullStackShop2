@@ -24,9 +24,6 @@
     "publish": "npm run build && firebase deploy",
     "eslint": "eslint ."
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -38,9 +35,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "eslint-plugin-react": "^7.17.0",
-    "eslint-plugin-react-hooks": "^2.0.1"
   }
 }
