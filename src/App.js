@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react'
+import { Container, Form, Button, Table, Menu, Link } from 'semantic-ui-react'
+import { connect } from 'react-redux'
 
 import './App.css'
 import fire from './fire'
 import ProductForm from './components/ProductForm'
 import Products from './components/Products'
 
-import NewNote from './components/NewNote'
 //import Notes from './components/Notes'
-import { connect } from 'react-redux'
 import { initializeNotes } from './reducers/noteReducer'
 import { fetchMessages } from './reducers/messageReducer'
 
 
 const App = (props) => {
 
-  const [messages2, setMessages2] = useState([])
   const [newMessage, setNewMessage] = useState('')
   const [page, setPage] = useState('products')
   console.log('page', page)
@@ -32,38 +31,20 @@ const App = (props) => {
     setNewMessage('') // <- clear the input
   }
 
-  const MessageContent = () => {
-
-    return (
-      <ul>
-        {props.messages.map(message => <li key={message.id}>{message.text}</li>)}
-      </ul>
-    )
-
-  }
-
   return (
-    <div className="App">
-      <div>
-        <button onClick={() => setPage('products')}>Products</button>
-        <button onClick={() => setPage('productform')}>Product form</button>
-      </div>
+    <Container>
+      <Menu inverted color='red' >
+        <Menu.Item link>
+          <a onClick={() => setPage('products')}>Products</a>
+        </Menu.Item>
+        <Menu.Item link>
+          <a onClick={() => setPage('productform')}>Add Product</a>
+        </Menu.Item>
+      </Menu>
       <h2>Old School Shop</h2>
 
       <Products show={page === 'products'} />
       <ProductForm show={page === 'productform'}  />
-
-      <form onSubmit={AddMessage}>
-        <div>
-          Add message
-          <input
-            type="text"
-            value={newMessage}
-            onChange={({ target }) => setNewMessage(target.value)}
-          />
-        </div>
-        <input type="submit" value="Save"/>
-      </form>
 
       <div>
         <h3>Messages Redux</h3>
@@ -71,7 +52,21 @@ const App = (props) => {
           {props.messages.map(message => <li key={message.id}>{message.text}</li>)}
         </ul>
       </div>
-    </div>
+
+      <Form onSubmit={AddMessage}>
+        <div>
+          <Form.Field>
+            <label>Add message</label>
+            <input
+              type="text"
+              value={newMessage}
+              onChange={({ target }) => setNewMessage(target.value)}
+            />
+          </Form.Field>
+        </div>
+        <Button type='submit'>Save</Button>
+      </Form>
+    </Container>
   )
 }
 
