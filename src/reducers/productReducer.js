@@ -1,45 +1,68 @@
-//import noteService from '../services/notes'
+import fire from '../fire'
 
 const productReducer = (state = [], action) => {
-  console.log('state now: ', state)
-  console.log('action', action)
-
-  switch (action.type) {
-  case 'NEW_PRODUCT':
-    return [...state, action.data]
-  case 'INIT_PRODUCTS':
+  console.log('ACTION: ', action)
+  switch(action.type) {
+  case 'CREATE_PRODUCT':
+    return state
+  case 'FETCH_PRODUCTS':
     return action.data
+  case 'REMOVE_PRODUCT':
+    return state
   default:
     return state
   }
 }
 
-export const initializeProducts = () => {
+const snapshotToArray = (snapshot) => {
+  var returnArr = []
+  snapshot.forEach((childSnapshot) => {
+    const product = {
+      name: childSnapshot.val().name,
+      description: childSnapshot.val().description,
+      price: childSnapshot.val().price,
+      category: childSnapshot.val().category,
+      id: childSnapshot.key
+    }
+    returnArr.push(product)
+  })
+  return returnArr
+}
+
+let productsRef = fire.database().ref('products')
+
+export const fetchProducts = () => {
   return async dispatch => {
-    //const notes = await noteService.getAll()
-    dispatch({
-      type: 'INIT_PRODUCTS',
-      data: null,
+    productsRef.orderByKey().limitToLast(100).on('value', snapshot => {
+      const products = snapshotToArray(snapshot)
+      console.log('fetchProducts', products)
+      dispatch({
+        type: 'FETCH_PRODUCTS',
+        data: products
+      })
     })
   }
 }
 
-//const generateId = () => Number((Math.random() * 1000000).toFixed(0))
-
-export const createProduct = content => {
+export const createProduct = (product) => {
   return async dispatch => {
-    //const newNote = await noteService.createNew(content)
+    productsRef.push(product)
+    console.log('createProduct', product)
     dispatch({
-      type: 'NEW_PRODUCT',
-      data: null,
+      type: 'CREATE_PRODUCT',
+      data: product
     })
   }
 }
 
-export const toggleImportanceOf = (id) => { // highlight-line
-  return {
-    type: 'TOGGLE_IMPORTANCE',
-    data: { id }
+export const removeProduct = (product) => {
+  return async dispatch => {
+    productsRef.child(product.id).remove()
+    console.log('removeProduct', product)
+    dispatch({
+      type: 'REMOVE_PRODUCT',
+      data: product
+    })
   }
 }
 

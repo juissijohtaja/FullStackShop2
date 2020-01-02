@@ -1,17 +1,28 @@
 import React, { useState } from 'react'
-import fire from '../fire'
+import { connect } from 'react-redux'
+import { fetchProducts, createProduct, removeProduct } from '../reducers/productReducer'
+import {
+  Button,
+  Container,
+  Divider,
+  Grid,
+  Header,
+  Icon,
+  Image,
+  List,
+  Menu,
+  Responsive,
+  Segment,
+  Sidebar,
+  Visibility,
+  Form
+} from 'semantic-ui-react'
 
 const ProductForm = (props) => {
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
   const [price, setPrice] = useState('')
   const [category, setCategory] = useState('')
-
-  if (!props.show) {
-    return null
-  }
-
-  //let booksRef = fire.database().ref('books').orderByKey().limitToLast(100)
 
   const AddProduct = (e) => {
     e.preventDefault() // <- prevent form submit from reloading the page
@@ -20,7 +31,7 @@ const ProductForm = (props) => {
       const newProduct = { name, description, price, category }
       console.log('newProduct', newProduct)
       /* Send the message to Firebase */
-      fire.database().ref('products').push( newProduct )
+      props.createProduct(newProduct)
 
       //clear the input
       setName('')
@@ -34,42 +45,50 @@ const ProductForm = (props) => {
   }
 
   return (
-    <div>
-      <h2>Add product</h2>
-      <form onSubmit={AddProduct}>
-        <div>
-          name
+    <Segment>
+      <h2>Lisää tuote</h2>
+      <Form onSubmit={AddProduct}>
+        <Form.Field>
+          <label>Nimi</label>
           <input
             value={name}
             onChange={({ target }) => setName(target.value)}
           />
-        </div>
-        <div>
-          description
+        </Form.Field>
+        <Form.Field>
+          <label>Kuvaus</label>
           <input
             value={description}
             onChange={({ target }) => setDescription(target.value)}
           />
-        </div>
-        <div>
-          price
+        </Form.Field>
+        <Form.Field>
+          <label>Hinta</label>
           <input
             type='number'
             value={price}
             onChange={({ target }) => setPrice(Number(target.value))}
           />
-        </div>
-        <div>
-          category
+        </Form.Field>
+        <Form.Field>
+          <label>Kategoria</label>
           <input
             value={category}
             onChange={({ target }) => setCategory(target.value)}
           />
-        </div>
-        <button type='submit'>Create product</button>
-      </form>
-    </div>
+        </Form.Field>
+        <Button type='submit'>Tallenna</Button>
+      </Form>
+    </Segment>
   )
 }
 
-export default ProductForm
+const mapStateToProps = (state) => {
+  return {
+    messages: state.messages,
+    products: state.products
+  }
+}
+export default connect(
+  mapStateToProps, { fetchProducts, createProduct, removeProduct }
+)(ProductForm)

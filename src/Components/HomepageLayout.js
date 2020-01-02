@@ -1,5 +1,9 @@
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
+import { fetchMessages, createMessage, removeMessage } from '../reducers/messageReducer'
+import fire from '../fire'
+
 import {
   Button,
   Container,
@@ -14,14 +18,36 @@ import {
   Segment,
   Sidebar,
   Visibility,
+  Form
 } from 'semantic-ui-react'
 
 import Products from './Products'
+import ProductForm from './ProductForm'
+
 import ResponsiveContainer from './ResponsiveContainer'
 import HomepageHeading from './HomepageHeading'
 
 
-const HomepageLayout = (show) => {
+
+
+const HomepageLayout = (props) => {
+  useEffect(() => {
+    props.fetchMessages()
+  }, [])
+
+  const [newMessage, setNewMessage] = useState('')
+
+  const AddMessage = (e) => {
+    e.preventDefault() // <- prevent form submit from reloading the page
+    props.createMessage(newMessage)
+    setNewMessage('') // <- clear the input
+  }
+
+  const handleRemove = (message) => {
+    //e.preventDefault()
+    props.removeMessage(message)
+  }
+
   return(
     <ResponsiveContainer>
       <HomepageHeading />
@@ -45,7 +71,7 @@ const HomepageLayout = (show) => {
               </p>
             </Grid.Column>
             <Grid.Column floated='right' width={6}>
-              <Image bordered rounded size='large' src='/images/wireframe/white-image.png' />
+              <Image bordered rounded size='large' src='https://images.pexels.com/photos/34153/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350' />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row>
@@ -69,7 +95,7 @@ const HomepageLayout = (show) => {
               I shouldnt have gone with their competitor.
               </Header>
               <p style={{ fontSize: '1.33em' }}>
-                <Image avatar src='/images/avatar/large/nan.jpg' />
+                <Image avatar src='https://images.pexels.com/photos/34153/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350' />
                 <b>Nan</b> Chief Fun Officer Acme Toys
               </p>
             </Grid.Column>
@@ -86,10 +112,8 @@ const HomepageLayout = (show) => {
           art of doing nothing by providing massive amounts of whitespace and generic content that
           can seem massive, monolithic and worth your attention.
           </p>
-          <Products show={show} />
-          <Button as='a' size='large'>
-          Read More
-          </Button>
+          <Products />
+          <ProductForm />
           <Divider
             as='h4'
             className='header'
@@ -109,6 +133,25 @@ const HomepageLayout = (show) => {
           <Button as='a' size='large'>
           Im Still Quite Interested
           </Button>
+          <div>
+            <h3>Messages Redux</h3>
+            <ul>
+              {props.messages.map(message => <li key={message.id}>{message.text} <Icon link name='remove' color='red' onClick={() => handleRemove(message)} /></li>)}
+            </ul>
+          </div>
+          <Form onSubmit={AddMessage}>
+            <div>
+              <Form.Field>
+                <label>Add message</label>
+                <input
+                  type="text"
+                  value={newMessage}
+                  onChange={({ target }) => setNewMessage(target.value)}
+                />
+              </Form.Field>
+            </div>
+            <Button type='submit'>Save</Button>
+          </Form>
         </Container>
       </Segment>
       <Segment inverted vertical style={{ padding: '5em 0em' }}>
@@ -148,4 +191,13 @@ const HomepageLayout = (show) => {
     </ResponsiveContainer>
   )
 }
-export default HomepageLayout
+
+const mapStateToProps = (state) => {
+  return {
+    messages: state.messages,
+    products: state.products
+  }
+}
+export default connect(
+  mapStateToProps, { fetchMessages, createMessage, removeMessage }
+)(HomepageLayout)

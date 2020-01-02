@@ -1,59 +1,71 @@
-import React, { useState, useEffect } from 'react'
-import fire from '../fire'
-
-const Products = ({ show }) => {
-  const [products, setProducts] = useState([])
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { fetchProducts, createProduct, removeProduct } from '../reducers/productReducer'
+import {
+  Button,
+  Container,
+  Divider,
+  Grid,
+  Header,
+  Icon,
+  Image,
+  List,
+  Menu,
+  Responsive,
+  Segment,
+  Sidebar,
+  Visibility,
+  Form,
+  Table
+} from 'semantic-ui-react'
+const Products = (props) => {
 
   useEffect(() => {
-    let productsRef = fire.database().ref('products').orderByKey().limitToLast(100)
-    productsRef.on('child_added', snapshot => {
-      /* Update React state when message is added at Firebase Database */
-      let product = {
-        name: snapshot.val().name,
-        description: snapshot.val().description,
-        price: snapshot.val().price,
-        category: snapshot.val().category,
-        id: snapshot.key
-      }
-      console.log('product', product)
-      setProducts(products => [...products, product])
-    })
+    props.fetchProducts()
   }, [])
 
-  if (!show) {
-    return null
+  const handleRemove = (product) => {
+    //e.preventDefault()
+    props.removeProduct(product)
   }
 
-
   return (
-    <div>
-      <h2>Products</h2>
-      <table>
-        <tbody>
-          <tr>
-            <th>Name</th>
-            <th>
-              Description
-            </th>
-            <th>
-              Price
-            </th>
-            <th>
-              Category
-            </th>
-          </tr>
-          {products.map(a =>
-            <tr key={a.name}>
-              <td>{a.name}</td>
-              <td>{a.description}</td>
-              <td>{a.price}</td>
-              <td>{a.category}</td>
-            </tr>
+    <Container>
+      <Header as='h2' style={{ fontSize: '2em' }}>
+          Tuotteet
+      </Header>
+      <Table celled>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>Nimi</Table.HeaderCell>
+            <Table.HeaderCell>Kuvaus</Table.HeaderCell>
+            <Table.HeaderCell>Hinta</Table.HeaderCell>
+            <Table.HeaderCell>Kategoria</Table.HeaderCell>
+            <Table.HeaderCell>Poista</Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {props.products.map(product =>
+            <Table.Row key={product.name}>
+              <Table.Cell>{product.name}</Table.Cell>
+              <Table.Cell>{product.description}</Table.Cell>
+              <Table.Cell>{product.price}</Table.Cell>
+              <Table.Cell>{product.category}</Table.Cell>
+              <Table.Cell><Icon link name='remove' color='red' onClick={() => handleRemove(product)} /></Table.Cell>
+            </Table.Row>
           )}
-        </tbody>
-      </table>
-    </div>
+        </Table.Body>
+      </Table>
+    </Container>
   )
 }
 
-export default Products
+const mapStateToProps = (state) => {
+  return {
+    messages: state.messages,
+    products: state.products
+  }
+}
+export default connect(
+  mapStateToProps, { fetchProducts, createProduct, removeProduct }
+)(Products)
