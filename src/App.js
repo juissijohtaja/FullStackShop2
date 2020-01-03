@@ -17,12 +17,15 @@ import {
 } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import {
+  BrowserRouter as Router,
+  Route, Link, Redirect, withRouter
+} from 'react-router-dom'
 
 import './App.css'
-import fire from './fire'
-import ProductForm from './components/ProductForm'
 import Products from './components/Products'
 import HomepageLayout from './components/HomepageLayout'
+import ProductsLayout from './components/ProductsLayout'
 
 
 //import Notes from './components/Notes'
@@ -30,37 +33,27 @@ import { initializeNotes } from './reducers/noteReducer'
 import { fetchMessages } from './reducers/messageReducer'
 
 
-const App = () => {
+const App = (props) => {
 
-  const [page, setPage] = useState('products')
+  const [page, setPage] = useState('')
   console.log('page', page)
 
   return (
-    <div>
-      <HomepageLayout show={page === 'homepagelayout'} />
-      <Container>
-        <Menu inverted color='red'>
-          <Menu.Item link>
-            <a onClick={() => setPage('products')}>Products</a>
-          </Menu.Item>
-          <Menu.Item link>
-            <a onClick={() => setPage('productform')}>Add Product</a>
-          </Menu.Item>
-          <Menu.Item link>
-            <a onClick={() => setPage('homepagelayout')}>HomepageLayout</a>
-          </Menu.Item>
-        </Menu>
-
-        <ProductForm show={page === 'productform'}  />
-
-      </Container>
-    </div>
+    <Router>
+      <Route exact path="/" render={() =>
+        <HomepageLayout />
+      } />
+      <Route exact path="/tuotteet" render={() =>
+        <ProductsLayout />
+      } />
+    </Router>
   )
 }
 
 const mapStateToProps = (state) => {
   return {
-    messages: state.messages
+    messages: state.messages,
+    router: state.router
   }
 }
 export default connect(

@@ -15,6 +15,12 @@ import {
   Sidebar,
   Visibility,
 } from 'semantic-ui-react'
+import {
+  BrowserRouter as Router,
+  Route, Link, Redirect, withRouter, NavLink
+} from 'react-router-dom'
+import { connect } from 'react-redux'
+
 
 // Heads up!
 // We using React Static to prerender our docs with server side rendering, this is a quite simple solution.
@@ -62,23 +68,21 @@ const DesktopContainer = (props) => {
             size='large'
           >
             <Container>
-              <Menu.Item as='a' active>
-                  Etusivu
-              </Menu.Item>
-              <Menu.Item as='a'>Tuotteet</Menu.Item>
+              <Menu.Item><NavLink to='/' exact activeClassName='active item'>Etusivu</NavLink></Menu.Item>
+              <Menu.Item><NavLink to='/tuotteet' activeClassName='active item'>Tuotteet</NavLink></Menu.Item>
               <Menu.Item as='a'>Lisää tuote</Menu.Item>
               <Menu.Item as='a'>Yhteystiedot</Menu.Item>
               <Menu.Item position='right'>
                 <Button as='a' inverted={!fixed}>
-                    Log in
+                    Kirjaudu
                 </Button>
                 <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
-                    Sign Up
+                    Rekisteröidy
                 </Button>
               </Menu.Item>
+
             </Container>
           </Menu>
-
         </Segment>
       </Visibility>
 
@@ -114,13 +118,13 @@ const MobileContainer = (props) => {
         visible={sidebarOpened}
       >
         <Menu.Item as='a' active>
-            Home
+            Etusivu
         </Menu.Item>
-        <Menu.Item as='a'>Work</Menu.Item>
-        <Menu.Item as='a'>Company</Menu.Item>
-        <Menu.Item as='a'>Careers</Menu.Item>
-        <Menu.Item as='a'>Log in</Menu.Item>
-        <Menu.Item as='a'>Sign Up</Menu.Item>
+        <Menu.Item as='a'>Tuotteet</Menu.Item>
+        <Menu.Item as='a'>Lisää tuote</Menu.Item>
+        <Menu.Item as='a'>Yhteystiedot</Menu.Item>
+        <Menu.Item as='a'>Kirjaudu</Menu.Item>
+        <Menu.Item as='a'>Rekisteröidy</Menu.Item>
       </Sidebar>
 
       <Sidebar.Pusher dimmed={sidebarOpened}>
@@ -137,10 +141,10 @@ const MobileContainer = (props) => {
               </Menu.Item>
               <Menu.Item position='right'>
                 <Button as='a' inverted>
-                    Log in
+                Kirjaudu
                 </Button>
                 <Button as='a' inverted style={{ marginLeft: '0.5em' }}>
-                    Sign Up
+                Rekisteröidy
                 </Button>
               </Menu.Item>
             </Menu>
@@ -168,4 +172,12 @@ ResponsiveContainer.propTypes = {
   children: PropTypes.node,
 }
 
-export default ResponsiveContainer
+//export default ResponsiveContainer
+const mapStateToProps = (state) => {
+  return {
+    messages: state.messages,
+  }
+}
+export default connect(
+  mapStateToProps, null
+)(ResponsiveContainer)
