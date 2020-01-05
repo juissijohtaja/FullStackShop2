@@ -70,7 +70,10 @@ const MessagesLayout = (props) => {
           </p>
           <div>
             <List>
-              {props.messages.map(message => <ListItem key={message.id} as={Link} to={`${props.match.path}/${message.friendlyUrl}`} >{message.text} <Icon link name='remove' color='red' onClick={() => handleRemove(message)} /></ListItem>)}
+              {props.messages.map(message => <div key={message.id}>
+                <ListItem as={Link} to={`${props.match.path}/${message.friendlyUrl}`} >{message.text}</ListItem>
+                <Icon link name='remove' color='red' onClick={() => handleRemove(message)} />
+              </div>)}
             </List>
           </div>
           <Header as='h4' style={{ fontSize: '2em' }}>

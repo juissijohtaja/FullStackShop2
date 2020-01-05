@@ -40,7 +40,6 @@ const DesktopContainer = (props) => {
   const [fixed, setFixed] = useState()
   console.log('DesktopContainer props', props)
   console.log('DesktopContainer pagePath', props.pagePath)
-  console.log('DesktopContainer pagePath', props.pagePath.includes('/viestit'))
 
 
   const hideFixedMenu = () => {
@@ -76,7 +75,7 @@ const DesktopContainer = (props) => {
               <Menu.Item as={NavLink} to='/' exact>Etusivu</Menu.Item>
               <Menu.Item as={NavLink} to='/tuotteet'>Tuotteet</Menu.Item>
               <Menu.Item as={NavLink} to='/viestit' exact isActive={() => {
-                return props.pagePath.includes('/viestit')
+                return props.pagePath === '/viestit' || props.pagePath === '/viestit/:id'
               }}>Viestit</Menu.Item>
               <Menu.Item position='right'>
                 <Button as='a' inverted={!fixed}>

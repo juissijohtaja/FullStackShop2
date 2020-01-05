@@ -18,9 +18,9 @@ const messageReducer = (state = [], action) => {
 const snapshotToArray = (snapshot) => {
   var returnArr = []
   snapshot.forEach((childSnapshot) => {
-    console.log('childSnapshot' ,childSnapshot)
+    //console.log('childSnapshot' ,childSnapshot)
     const item = { text: childSnapshot.val(), friendlyUrl: friendlyUrl(childSnapshot.val()), id: childSnapshot.key }
-    console.log('childSnapshot item' ,item)
+    //console.log('childSnapshot item' ,item)
     returnArr.push(item)
   })
   return returnArr
