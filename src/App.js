@@ -19,31 +19,23 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import {
   BrowserRouter as Router,
-  Route, Link, Redirect, withRouter
+  Route, Link, Redirect
 } from 'react-router-dom'
 
 import './App.css'
-import Products from './components/Products'
 import HomepageLayout from './components/HomepageLayout'
 import ProductsLayout from './components/ProductsLayout'
 import MessagesLayout from './components/MessagesLayout'
 import MessagePageLayout from './components/MessagePageLayout'
-
 
 import { fetchMessages } from './reducers/messageReducer'
 
 
 const App = () => {
 
-  /* const messageById = (id) => {
-    console.log('messageById', id)
-
-    return props.messages.find(message => message.id === id)
-  } */
-
   return (
     <Router>
-      <Route exact path="/" render={() =>
+      <Route exact path="/" component={HomepageLayout} render={() =>
         <HomepageLayout />
       } />
       <Route exact path="/tuotteet" render={() =>

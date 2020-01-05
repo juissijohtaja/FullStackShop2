@@ -37,6 +37,9 @@ const MessagesLayout = (props) => {
     props.fetchMessages()
   }, [])
 
+  console.log('MessagesLayout props', props)
+  console.log('MessagesLayout props', props.match.path)
+
   const [newMessage, setNewMessage] = useState('')
 
   const AddMessage = (e) => {
@@ -53,8 +56,6 @@ const MessagesLayout = (props) => {
     props.removeMessage(message)
   }
 
-  console.log('friendly', friendlyUrl('What does “use strict” do in JavaScript, and what is the reasoning behind it?'))
-
   return(
     <ResponsiveContainer>
       <Segment style={{ padding: '8em 0em' }} vertical>
@@ -69,7 +70,7 @@ const MessagesLayout = (props) => {
           </p>
           <div>
             <List>
-              {props.messages.map(message => <ListItem key={message.id} as={Link} to={`/viestit/${message.friendlyUrl}`} exact>{message.text} <Icon link name='remove' color='red' onClick={() => handleRemove(message)} /></ListItem>)}
+              {props.messages.map(message => <ListItem key={message.id} as={Link} to={`${props.match.path}/${message.friendlyUrl}`} >{message.text} <Icon link name='remove' color='red' onClick={() => handleRemove(message)} /></ListItem>)}
             </List>
           </div>
           <Header as='h4' style={{ fontSize: '2em' }}>
@@ -102,4 +103,4 @@ const mapStateToProps = (state) => {
 }
 export default connect(
   mapStateToProps, { fetchMessages, createMessage, removeMessage }
-)(MessagesLayout)
+)(withRouter(MessagesLayout))

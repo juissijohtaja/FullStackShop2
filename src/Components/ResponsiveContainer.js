@@ -38,6 +38,10 @@ const getWidth = () => {
  */
 const DesktopContainer = (props) => {
   const [fixed, setFixed] = useState()
+  console.log('DesktopContainer props', props)
+  console.log('DesktopContainer pagePath', props.pagePath)
+  console.log('DesktopContainer pagePath', props.pagePath.includes('/viestit'))
+
 
   const hideFixedMenu = () => {
     console.log('hideFixedMenu')
@@ -71,7 +75,9 @@ const DesktopContainer = (props) => {
             <Container>
               <Menu.Item as={NavLink} to='/' exact>Etusivu</Menu.Item>
               <Menu.Item as={NavLink} to='/tuotteet'>Tuotteet</Menu.Item>
-              <Menu.Item as={NavLink} to='/viestit' exact>Viestit</Menu.Item>
+              <Menu.Item as={NavLink} to='/viestit' exact isActive={() => {
+                return props.pagePath.includes('/viestit')
+              }}>Viestit</Menu.Item>
               <Menu.Item position='right'>
                 <Button as='a' inverted={!fixed}>
                     Kirjaudu
@@ -156,12 +162,17 @@ MobileContainer.propTypes = {
   children: PropTypes.node,
 }
 
-const ResponsiveContainer = ({ children }) => (
-  <div>
-    <DesktopContainer>{children}</DesktopContainer>
-    <MobileContainer>{children}</MobileContainer>
-  </div>
-)
+const ResponsiveContainer = (props) => {
+  console.log('ResponsiveContainer props', props)
+  console.log('ResponsiveContainer props', props.match.path)
+  const pagePath = props.match.path
+  return(
+    <div>
+      <DesktopContainer pagePath={pagePath}>{props.children}</DesktopContainer>
+      <MobileContainer pagePath={pagePath}>{props.children}</MobileContainer>
+    </div>
+  )
+}
 
 ResponsiveContainer.propTypes = {
   children: PropTypes.node,
@@ -175,4 +186,4 @@ const mapStateToProps = (state) => {
 }
 export default connect(
   mapStateToProps, null
-)(ResponsiveContainer)
+)(withRouter(ResponsiveContainer))

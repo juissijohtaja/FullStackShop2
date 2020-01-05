@@ -34,14 +34,11 @@ const MessagePageLayout = (props) => {
     props.fetchMessages()
   }, [])
 
-  console.log('props', props)
-  console.log('props match', props.match.params.id)
+  console.log('MessagePageLayout props', props)
+  console.log('MessagePageLayout props match', props.match.path)
+  const pagePath = props.match.path
 
   const messageContent = props.messages.find(message => message.friendlyUrl === props.match.params.id)
-  if (messageContent) {
-    console.log('props messageContent', messageContent)
-    console.log('props messageContent', messageContent.text)
-  }
 
   return(
     <ResponsiveContainer>
