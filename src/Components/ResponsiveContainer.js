@@ -15,6 +15,7 @@ import {
   Sidebar,
   Visibility,
 } from 'semantic-ui-react'
+
 import {
   BrowserRouter as Router,
   Route, Link, Redirect, withRouter, NavLink
@@ -68,10 +69,9 @@ const DesktopContainer = (props) => {
             size='large'
           >
             <Container>
-              <Menu.Item><NavLink to='/' exact activeClassName='active item'>Etusivu</NavLink></Menu.Item>
-              <Menu.Item><NavLink to='/tuotteet' activeClassName='active item'>Tuotteet</NavLink></Menu.Item>
-              <Menu.Item as='a'>Lisää tuote</Menu.Item>
-              <Menu.Item as='a'>Yhteystiedot</Menu.Item>
+              <Menu.Item as={NavLink} to='/' exact>Etusivu</Menu.Item>
+              <Menu.Item as={NavLink} to='/tuotteet'>Tuotteet</Menu.Item>
+              <Menu.Item as={NavLink} to='/viestit' exact>Viestit</Menu.Item>
               <Menu.Item position='right'>
                 <Button as='a' inverted={!fixed}>
                     Kirjaudu
@@ -117,14 +117,9 @@ const MobileContainer = (props) => {
         vertical
         visible={sidebarOpened}
       >
-        <Menu.Item as='a' active>
-            Etusivu
-        </Menu.Item>
-        <Menu.Item as='a'>Tuotteet</Menu.Item>
-        <Menu.Item as='a'>Lisää tuote</Menu.Item>
-        <Menu.Item as='a'>Yhteystiedot</Menu.Item>
-        <Menu.Item as='a'>Kirjaudu</Menu.Item>
-        <Menu.Item as='a'>Rekisteröidy</Menu.Item>
+        <Menu.Item as={NavLink} to='/' exact>Etusivu</Menu.Item>
+        <Menu.Item as={NavLink} to='/tuotteet'>Tuotteet</Menu.Item>
+        <Menu.Item as={NavLink} to='/viestit' exact>Viestit</Menu.Item>
       </Sidebar>
 
       <Sidebar.Pusher dimmed={sidebarOpened}>

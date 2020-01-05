@@ -26,17 +26,20 @@ import './App.css'
 import Products from './components/Products'
 import HomepageLayout from './components/HomepageLayout'
 import ProductsLayout from './components/ProductsLayout'
+import MessagesLayout from './components/MessagesLayout'
+import MessagePageLayout from './components/MessagePageLayout'
 
 
-//import Notes from './components/Notes'
-import { initializeNotes } from './reducers/noteReducer'
 import { fetchMessages } from './reducers/messageReducer'
 
 
-const App = (props) => {
+const App = () => {
 
-  const [page, setPage] = useState('')
-  console.log('page', page)
+  /* const messageById = (id) => {
+    console.log('messageById', id)
+
+    return props.messages.find(message => message.id === id)
+  } */
 
   return (
     <Router>
@@ -45,6 +48,12 @@ const App = (props) => {
       } />
       <Route exact path="/tuotteet" render={() =>
         <ProductsLayout />
+      } />
+      <Route exact path="/viestit" render={() =>
+        <MessagesLayout />
+      } />
+      <Route path="/viestit/:id" render={() =>
+        <MessagePageLayout />
       } />
     </Router>
   )
@@ -57,7 +66,7 @@ const mapStateToProps = (state) => {
   }
 }
 export default connect(
-  mapStateToProps, { initializeNotes, fetchMessages }
+  mapStateToProps, { fetchMessages }
 )(App)
 
 
