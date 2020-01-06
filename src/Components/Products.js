@@ -54,7 +54,7 @@ const Products = (props) => {
         <Table.Body>
           {props.products.map(product =>
             <Table.Row verticalAlign='top' key={product.name}>
-              <Table.Cell><ListItem as={Link} to={`${props.match.path}/${product.friendlyUrl}`} >{product.name}</ListItem></Table.Cell>
+              <Table.Cell><ListItem as={Link} to={`/tuotteet/${product.friendlyUrl}`} >{product.name}</ListItem></Table.Cell>
               <Table.Cell>{product.description}</Table.Cell>
               <Table.Cell>{product.price}</Table.Cell>
               <Table.Cell>{product.category}</Table.Cell>
