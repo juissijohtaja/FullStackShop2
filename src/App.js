@@ -28,6 +28,8 @@ import ProductsLayout from './components/ProductsLayout'
 import ProductPageLayout from './components/ProductPageLayout'
 import MessagesLayout from './components/MessagesLayout'
 import MessagePageLayout from './components/MessagePageLayout'
+import ShoppingCartLayout from './components/ShoppingCartLayout'
+
 
 import { fetchMessages } from './reducers/messageReducer'
 
@@ -50,6 +52,9 @@ const App = () => {
       } />
       <Route path="/viestit/:id" render={() =>
         <MessagePageLayout />
+      } />
+      <Route path="/ostoskori" render={() =>
+        <ShoppingCartLayout />
       } />
     </Router>
   )

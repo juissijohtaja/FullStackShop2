@@ -19,6 +19,7 @@ import {
   Form,
   Table
 } from 'semantic-ui-react'
+
 import {
   BrowserRouter as Router,
   Route, Link, Redirect, withRouter, NavLink
@@ -52,12 +53,12 @@ const Products = (props) => {
         </Table.Header>
         <Table.Body>
           {props.products.map(product =>
-            <Table.Row key={product.name}>
+            <Table.Row verticalAlign='top' key={product.name}>
               <Table.Cell><ListItem as={Link} to={`${props.match.path}/${product.friendlyUrl}`} >{product.name}</ListItem></Table.Cell>
               <Table.Cell>{product.description}</Table.Cell>
               <Table.Cell>{product.price}</Table.Cell>
               <Table.Cell>{product.category}</Table.Cell>
-              <Table.Cell><Icon link name='remove' color='red' onClick={() => handleRemove(product)} /></Table.Cell>
+              <Table.Cell><Icon link name='trash alternate' color='red' onClick={() => handleRemove(product)} /></Table.Cell>
             </Table.Row>
           )}
         </Table.Body>

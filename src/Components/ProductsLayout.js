@@ -24,19 +24,7 @@ import ProductForm from './ProductForm'
 import Footer from './Footer'
 import ResponsiveContainer from './ResponsiveContainer'
 
-const ProductsLayout = (props) => {
-  useEffect(() => {
-    props.fetchMessages()
-  }, [])
-
-  const [newMessage, setNewMessage] = useState('')
-
-  const AddMessage = (e) => {
-    e.preventDefault() // <- prevent form submit from reloading the page
-    props.createMessage(newMessage)
-    setNewMessage('') // <- clear the input
-  }
-
+const ProductsLayout = () => {
 
   return(
     <ResponsiveContainer>

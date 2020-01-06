@@ -6,7 +6,7 @@ const shoppingcartReducer = (state = [], action) => {
   case 'ADD_PRODUCT_TO_CART':
     return [...state, action.data]
   case 'REMOVE_PRODUCT_FROM_CART':
-    return state
+    return stateCopy.filter(item => item.product.id !== action.data.id)
   case 'UPDATE_CART':
     return stateCopy.map(item => item.product.id === action.data.product.id ? action.data : item)
   default:
@@ -25,12 +25,12 @@ export const addProductToCart = (cartProduct) => {
   }
 }
 
-export const removeProductFromCart = (product) => {
+export const removeProductFromCart = (cartProduct) => {
+  console.log('removeProductFromCart', cartProduct)
   return async dispatch => {
-    console.log('removeProductFromCart')
     dispatch({
       type: 'REMOVE_PRODUCT_FROM_CART',
-      data: product
+      data: cartProduct
     })
   }
 }
@@ -39,6 +39,20 @@ export const increaseAmountInCart = (cartProduct) => {
   console.log('increaseAmountInCart cartProduct.amount before', cartProduct.amount)
   cartProduct.amount += 1
   console.log('increaseAmountInCart cartProduct.amount after', cartProduct.amount)
+  return async dispatch => {
+    dispatch({
+      type: 'UPDATE_CART',
+      data: cartProduct
+    })
+  }
+}
+
+export const decreaseAmountInCart = (cartProduct) => {
+  console.log('decreaseAmountInCart cartProduct.amount before', cartProduct.amount)
+  if (cartProduct.amount > 1) {
+    cartProduct.amount -= 1
+  }
+  console.log('decreaseAmountInCart cartProduct.amount after', cartProduct.amount)
   return async dispatch => {
     dispatch({
       type: 'UPDATE_CART',
