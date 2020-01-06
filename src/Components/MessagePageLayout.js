@@ -36,7 +36,6 @@ const MessagePageLayout = (props) => {
 
   console.log('MessagePageLayout props', props)
   console.log('MessagePageLayout props match', props.match.path)
-  const pagePath = props.match.path
 
   const messageContent = props.messages.find(message => message.friendlyUrl === props.match.params.id)
 

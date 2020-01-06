@@ -5,11 +5,13 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import noteReducer from './reducers/noteReducer'
 import productReducer from './reducers/productReducer'
 import messageReducer from './reducers/messageReducer'
+import shoppingcartReducer from './reducers/shoppingcartReducer'
 
 const reducer = combineReducers({
   notes: noteReducer,
   products: productReducer,
-  messages: messageReducer
+  messages: messageReducer,
+  shoppingcart: shoppingcartReducer
 })
 
 const store = createStore(

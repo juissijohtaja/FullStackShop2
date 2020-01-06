@@ -1,4 +1,5 @@
 import fire from '../fire'
+import friendlyUrl from 'friendly-url'
 
 const productReducer = (state = [], action) => {
   console.log('ACTION: ', action)
@@ -22,6 +23,7 @@ const snapshotToArray = (snapshot) => {
       description: childSnapshot.val().description,
       price: childSnapshot.val().price,
       category: childSnapshot.val().category,
+      friendlyUrl: friendlyUrl(childSnapshot.val().name),
       id: childSnapshot.key
     }
     returnArr.push(product)

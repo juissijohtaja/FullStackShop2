@@ -25,6 +25,7 @@ import {
 import './App.css'
 import HomepageLayout from './components/HomepageLayout'
 import ProductsLayout from './components/ProductsLayout'
+import ProductPageLayout from './components/ProductPageLayout'
 import MessagesLayout from './components/MessagesLayout'
 import MessagePageLayout from './components/MessagePageLayout'
 
@@ -40,6 +41,9 @@ const App = () => {
       } />
       <Route exact path="/tuotteet" render={() =>
         <ProductsLayout />
+      } />
+      <Route path="/tuotteet/:id" render={() =>
+        <ProductPageLayout />
       } />
       <Route exact path="/viestit" render={() =>
         <MessagesLayout />

@@ -10,6 +10,7 @@ import {
   Icon,
   Image,
   List,
+  ListItem,
   Menu,
   Responsive,
   Segment,
@@ -18,6 +19,11 @@ import {
   Form,
   Table
 } from 'semantic-ui-react'
+import {
+  BrowserRouter as Router,
+  Route, Link, Redirect, withRouter, NavLink
+} from 'react-router-dom'
+
 const Products = (props) => {
 
   useEffect(() => {
@@ -47,7 +53,7 @@ const Products = (props) => {
         <Table.Body>
           {props.products.map(product =>
             <Table.Row key={product.name}>
-              <Table.Cell>{product.name}</Table.Cell>
+              <Table.Cell><ListItem as={Link} to={`${props.match.path}/${product.friendlyUrl}`} >{product.name}</ListItem></Table.Cell>
               <Table.Cell>{product.description}</Table.Cell>
               <Table.Cell>{product.price}</Table.Cell>
               <Table.Cell>{product.category}</Table.Cell>
@@ -68,4 +74,4 @@ const mapStateToProps = (state) => {
 }
 export default connect(
   mapStateToProps, { fetchProducts, createProduct, removeProduct }
-)(Products)
+)(withRouter(Products))
