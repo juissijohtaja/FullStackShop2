@@ -42,9 +42,6 @@ const ProductageLayout = (props) => {
 
   const addToBasket = () => {
     //e.preventDefault()
-    console.log('addToBasket before', props.shoppingcart)
-    console.log('addToBasket productContent', productContent.id)
-    console.log('addToBasket', props.shoppingcart.some(item => item.product.id === productContent.id))
     const itemToUpdate = props.shoppingcart.find(item => item.product.id === productContent.id)
     if (!itemToUpdate) {
         console.log('Product added to cart')
@@ -53,7 +50,6 @@ const ProductageLayout = (props) => {
         props.increaseAmountInCart(itemToUpdate)
         console.log('Product already in cart')
     }
-    //props.addProductToCart({ product: productContent, amount: 1 })
   }
 
   const ProductSegment = () => {

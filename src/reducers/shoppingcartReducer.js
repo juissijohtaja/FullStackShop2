@@ -14,10 +14,27 @@ const shoppingcartReducer = (state = [], action) => {
   }
 }
 
-export const addProductToCart = (cartProduct) => {
-  const item = { product: cartProduct.product, amount: cartProduct.amount }
+/* export const initShoppingCart = () => {
+  console.log('initShoppingCart')
+  const shoppingCartJSON = window.localStorage.getItem('oldSchoolShoppingCart')
+  const cart = JSON.parse(shoppingCartJSON)
+  console.log('initShoppingCart cart', cart)
+  //const item = { product: cartProduct.product, amount: cartProduct.amount }
   return async dispatch => {
-    console.log('addProductToCart')
+    dispatch({
+      type: 'INIT_CART',
+      data: cart
+    })
+  }
+} */
+
+export const addProductToCart = (cartProduct) => {
+  console.log('addProductToCart', cartProduct)
+  const item = { product: cartProduct.product, amount: cartProduct.amount }
+  /* window.localStorage.setItem(
+    'oldSchoolShoppingCart', JSON.stringify(cartProduct)
+  ) */
+  return async dispatch => {
     dispatch({
       type: 'ADD_PRODUCT_TO_CART',
       data: item

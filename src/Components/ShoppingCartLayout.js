@@ -31,9 +31,6 @@ import Footer from './Footer'
 import ResponsiveContainer from './ResponsiveContainer'
 
 const ShoppingCartLayout = (props) => {
-  useEffect(() => {
-    //props.fetchMessages()
-  }, [])
 
   const handleRemoveFromCart = (cartProduct) => {
     //e.preventDefault()

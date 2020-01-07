@@ -33,8 +33,7 @@ import ShoppingCartLayout from './components/ShoppingCartLayout'
 
 import { fetchMessages } from './reducers/messageReducer'
 
-
-const App = () => {
+const App = (props) => {
 
   return (
     <Router>
@@ -63,7 +62,8 @@ const App = () => {
 const mapStateToProps = (state) => {
   return {
     messages: state.messages,
-    router: state.router
+    router: state.router,
+    shoppingcart: state.shoppingcart
   }
 }
 export default connect(

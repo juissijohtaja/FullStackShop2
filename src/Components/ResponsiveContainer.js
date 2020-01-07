@@ -144,8 +144,8 @@ const MobileContainer = (props) => {
                 <Button as='a' inverted>
                 Kirjaudu
                 </Button>
-                <Button as='a' inverted style={{ marginLeft: '0.5em' }}>
-                Rekisteröidy
+                <Button as={NavLink} to='/ostoskori' inverted style={{ marginLeft: '0.5em' }}>
+                  <i aria-hidden="true" className="shopping basket icon"></i> Ostoskori
                 </Button>
               </Menu.Item>
             </Menu>
