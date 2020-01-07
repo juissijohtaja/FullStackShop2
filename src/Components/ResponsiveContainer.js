@@ -39,8 +39,6 @@ const getWidth = () => {
 const DesktopContainer = (props) => {
   const [fixed, setFixed] = useState()
   console.log('DesktopContainer props', props)
-  console.log('DesktopContainer pagePath', props.pagePath)
-
 
   const hideFixedMenu = () => {
     console.log('hideFixedMenu')
@@ -78,9 +76,14 @@ const DesktopContainer = (props) => {
                 return props.pagePath === '/viestit' || props.pagePath === '/viestit/:id'
               }}>Viestit</Menu.Item>
               <Menu.Item position='right'>
-                <Button as='a' inverted={!fixed}>
+                {props.loggeduser.username ?
+                  <Button as={NavLink} to='/yllapito' inverted={!fixed}>
+                    Ylläpito
+                  </Button> :
+                  <Button as={NavLink} to='/kirjaudu' inverted={!fixed}>
                     Kirjaudu
-                </Button>
+                  </Button>
+                }
                 <Button as={NavLink} to='/ostoskori' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
                   <i aria-hidden="true" className="shopping basket icon"></i> Ostoskori
 
@@ -141,7 +144,7 @@ const MobileContainer = (props) => {
                 <Icon name='sidebar' />
               </Menu.Item>
               <Menu.Item position='right'>
-                <Button as='a' inverted>
+                <Button as={NavLink} to='/kirjaudu' inverted>
                 Kirjaudu
                 </Button>
                 <Button as={NavLink} to='/ostoskori' inverted style={{ marginLeft: '0.5em' }}>
@@ -163,13 +166,12 @@ MobileContainer.propTypes = {
 }
 
 const ResponsiveContainer = (props) => {
-  console.log('ResponsiveContainer props', props)
-  console.log('ResponsiveContainer props', props.match.path)
   const pagePath = props.match.path
+  const loggeduser = props.loggeduser
   return(
     <div>
-      <DesktopContainer pagePath={pagePath}>{props.children}</DesktopContainer>
-      <MobileContainer pagePath={pagePath}>{props.children}</MobileContainer>
+      <DesktopContainer pagePath={pagePath} loggeduser={loggeduser}>{props.children}</DesktopContainer>
+      <MobileContainer pagePath={pagePath} loggeduser={loggeduser}>{props.children}</MobileContainer>
     </div>
   )
 }
@@ -182,6 +184,7 @@ ResponsiveContainer.propTypes = {
 const mapStateToProps = (state) => {
   return {
     messages: state.messages,
+    loggeduser: state.loggeduser
   }
 }
 export default connect(

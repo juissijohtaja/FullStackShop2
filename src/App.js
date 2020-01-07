@@ -29,11 +29,13 @@ import ProductPageLayout from './components/ProductPageLayout'
 import MessagesLayout from './components/MessagesLayout'
 import MessagePageLayout from './components/MessagePageLayout'
 import ShoppingCartLayout from './components/ShoppingCartLayout'
+import LoginPageLayout from './components/LoginPageLayout'
+import AdminLayout from './components/AdminLayout'
 
 
 import { fetchMessages } from './reducers/messageReducer'
 
-const App = (props) => {
+const App = () => {
 
   return (
     <Router>
@@ -54,6 +56,12 @@ const App = (props) => {
       } />
       <Route path="/ostoskori" render={() =>
         <ShoppingCartLayout />
+      } />
+      <Route path="/kirjaudu" render={() =>
+        <LoginPageLayout />
+      } />
+      <Route path="/yllapito" render={() =>
+        <AdminLayout />
       } />
     </Router>
   )

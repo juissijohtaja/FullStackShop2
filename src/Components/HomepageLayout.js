@@ -108,8 +108,6 @@ const HomepageLayout = (props) => {
           art of doing nothing by providing massive amounts of whitespace and generic content that
           can seem massive, monolithic and worth your attention.
           </p>
-          <Products />
-          <ProductForm />
           <Divider
             as='h4'
             className='header'

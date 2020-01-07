@@ -31,6 +31,18 @@ import Footer from './Footer'
 import ResponsiveContainer from './ResponsiveContainer'
 
 const ShoppingCartLayout = (props) => {
+  const [cartTotal, setCartTotal] = useState(0)
+  useEffect(() => {
+    const countCartTotal = () => {
+      props.shoppingcart.map(item => {
+        const productSum = item.product.price * item.amount
+        cartTotalSum += productSum
+      })
+    }
+    let cartTotalSum = 0
+    countCartTotal()
+    setCartTotal(cartTotalSum)
+  }, [props.shoppingcart])
 
   const handleRemoveFromCart = (cartProduct) => {
     //e.preventDefault()
@@ -64,6 +76,7 @@ const ShoppingCartLayout = (props) => {
                 <Table.HeaderCell>Nimi</Table.HeaderCell>
                 <Table.HeaderCell>Hinta</Table.HeaderCell>
                 <Table.HeaderCell>Lukumäärä</Table.HeaderCell>
+                <Table.HeaderCell>Välisumma</Table.HeaderCell>
                 <Table.HeaderCell>Poista</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
@@ -71,17 +84,21 @@ const ShoppingCartLayout = (props) => {
               {props.shoppingcart.map(item =>
                 <Table.Row key={item.product.name}>
                   <Table.Cell><ListItem as={Link} to={`/tuotteet/${item.product.friendlyUrl}`} >{item.product.name}</ListItem></Table.Cell>
-                  <Table.Cell>{item.product.price}</Table.Cell>
+                  <Table.Cell>{item.product.price} €</Table.Cell>
                   <Table.Cell>
                     {item.amount > 1 ? <Icon link name='minus square' color='teal' size='large' onClick={() => handleDecreaseAmountInCart(item.product)} /> : <Icon disabled name='minus square' color='teal' size='large' /> }
                     <Label basic>{item.amount}</Label>
                     <Icon link name='plus square' color='teal' size='large' onClick={() => handleIncreaseAmountInCart(item.product)} />
                   </Table.Cell>
+                  <Table.Cell>{item.product.price * item.amount} €</Table.Cell>
                   <Table.Cell><Icon link name='trash alternate' color='red' onClick={() => handleRemoveFromCart(item.product)} /></Table.Cell>
                 </Table.Row>
               )}
             </Table.Body>
           </Table>
+          <Header as='h2' style={{ fontSize: '2em' }}>
+            Kokonaissumma {cartTotal} €
+          </Header>
         </Container>
       </Segment>
       <Footer />

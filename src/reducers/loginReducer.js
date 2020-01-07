@@ -1,30 +1,33 @@
 
-const shoppingcartReducer = (state = [], action) => {
+const loginReducer = (state = [], action) => {
   console.log('ACTION: ', action)
-  const stateCopy = [...state]
   switch(action.type) {
-  case 'ADD_PRODUCT_TO_CART':
-    return [...state, action.data]
-  case 'REMOVE_PRODUCT_FROM_CART':
-    return stateCopy.filter(item => item.product.id !== action.data.id)
-  case 'UPDATE_CART':
-    return stateCopy.map(item => item.product.id === action.data.product.id ? action.data : item)
+  case 'ADD_USER':
+    return action.data
+  case 'LOGIN_DENIED':
+    return state
   default:
     return state
   }
 }
 
-export const addProductToCart = (cartProduct) => {
-  console.log('addProductToCart', cartProduct)
-  const item = { product: cartProduct.product, amount: cartProduct.amount }
-  /* window.localStorage.setItem(
-    'oldSchoolShoppingCart', JSON.stringify(cartProduct)
-  ) */
-  return async dispatch => {
-    dispatch({
-      type: 'ADD_PRODUCT_TO_CART',
-      data: item
-    })
+export const loginUser = (user) => {
+  console.log('loginUser', user)
+  //const item = { userid: user.userid, password: user.password }
+  if (user.password === 'admin') {
+    return async dispatch => {
+      dispatch({
+        type: 'ADD_USER',
+        data: user
+      })
+    }
+  } else {
+    return async dispatch => {
+      dispatch({
+        type: 'LOGIN_DENIED',
+        data: null
+      })
+    }
   }
 }
 
@@ -64,4 +67,4 @@ export const decreaseAmountInCart = (cartProduct) => {
   }
 }
 
-export default shoppingcartReducer
+export default loginReducer
