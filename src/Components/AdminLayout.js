@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { fetchMessages, createMessage, removeMessage } from '../reducers/messageReducer'
+import { logoutUser } from '../reducers/loginReducer'
 
 import {
   Button,
@@ -27,6 +28,10 @@ import ResponsiveContainer from './ResponsiveContainer'
 
 const AdminLayout = (props) => {
 
+  const handleLogout = (e) => {
+    props.logoutUser()
+  }
+
   return(
     <ResponsiveContainer>
       <Segment style={{ padding: '8em 0em' }} vertical>
@@ -36,6 +41,9 @@ const AdminLayout = (props) => {
           </Header>
           <p style={{ fontSize: '1.33em' }}>
             Terve {props.loggeduser.username}! Hallinnoi tuotteita.
+          </p>
+          <p style={{ fontSize: '1.33em' }}>
+            <Button color='orange' onClick={() => handleLogout()}><i aria-hidden='true' className='log out icon'></i> Kirjaudu ulos</Button>
           </p>
           <Products />
           <ProductForm />
@@ -54,5 +62,5 @@ const mapStateToProps = (state) => {
   }
 }
 export default connect(
-  mapStateToProps, { fetchMessages, createMessage, removeMessage }
+  mapStateToProps, { fetchMessages, createMessage, removeMessage, logoutUser }
 )(withRouter(AdminLayout))

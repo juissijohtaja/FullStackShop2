@@ -35,7 +35,7 @@ import AdminLayout from './components/AdminLayout'
 
 import { fetchMessages } from './reducers/messageReducer'
 
-const App = () => {
+const App = (props) => {
 
   return (
     <Router>
@@ -58,10 +58,10 @@ const App = () => {
         <ShoppingCartLayout />
       } />
       <Route path="/kirjaudu" render={() =>
-        <LoginPageLayout />
+        props.loggeduser.username ? <Redirect to="/yllapito" /> : <LoginPageLayout />
       } />
       <Route path="/yllapito" render={() =>
-        <AdminLayout />
+        props.loggeduser.username ? <AdminLayout /> : <Redirect to="/kirjaudu" />
       } />
     </Router>
   )
@@ -71,7 +71,8 @@ const mapStateToProps = (state) => {
   return {
     messages: state.messages,
     router: state.router,
-    shoppingcart: state.shoppingcart
+    shoppingcart: state.shoppingcart,
+    loggeduser: state.loggeduser
   }
 }
 export default connect(

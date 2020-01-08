@@ -4,6 +4,8 @@ const loginReducer = (state = [], action) => {
   switch(action.type) {
   case 'ADD_USER':
     return action.data
+  case 'REMOVE_USER':
+    return action.data
   case 'LOGIN_DENIED':
     return state
   default:
@@ -31,38 +33,12 @@ export const loginUser = (user) => {
   }
 }
 
-export const removeProductFromCart = (cartProduct) => {
-  console.log('removeProductFromCart', cartProduct)
+export const logoutUser = () => {
+  console.log('logoutUser')
   return async dispatch => {
     dispatch({
-      type: 'REMOVE_PRODUCT_FROM_CART',
-      data: cartProduct
-    })
-  }
-}
-
-export const increaseAmountInCart = (cartProduct) => {
-  console.log('increaseAmountInCart cartProduct.amount before', cartProduct.amount)
-  cartProduct.amount += 1
-  console.log('increaseAmountInCart cartProduct.amount after', cartProduct.amount)
-  return async dispatch => {
-    dispatch({
-      type: 'UPDATE_CART',
-      data: cartProduct
-    })
-  }
-}
-
-export const decreaseAmountInCart = (cartProduct) => {
-  console.log('decreaseAmountInCart cartProduct.amount before', cartProduct.amount)
-  if (cartProduct.amount > 1) {
-    cartProduct.amount -= 1
-  }
-  console.log('decreaseAmountInCart cartProduct.amount after', cartProduct.amount)
-  return async dispatch => {
-    dispatch({
-      type: 'UPDATE_CART',
-      data: cartProduct
+      type: 'REMOVE_USER',
+      data: []
     })
   }
 }

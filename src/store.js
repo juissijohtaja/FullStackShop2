@@ -28,7 +28,8 @@ const store = createStore(
 
 store.subscribe(() => {
   saveState({
-    shoppingcart: store.getState().shoppingcart
+    shoppingcart: store.getState().shoppingcart,
+    loggeduser: store.getState().loggeduser
   })
 })
 

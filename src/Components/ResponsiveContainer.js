@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Button,
   Container,
@@ -72,9 +72,7 @@ const DesktopContainer = (props) => {
             <Container>
               <Menu.Item as={NavLink} to='/' exact>Etusivu</Menu.Item>
               <Menu.Item as={NavLink} to='/tuotteet'>Tuotteet</Menu.Item>
-              <Menu.Item as={NavLink} to='/viestit' exact isActive={() => {
-                return props.pagePath === '/viestit' || props.pagePath === '/viestit/:id'
-              }}>Viestit</Menu.Item>
+              <Menu.Item as={NavLink} to='/viestit'>Viestit</Menu.Item>
               <Menu.Item position='right'>
                 {props.loggeduser.username ?
                   <Button as={NavLink} to='/yllapito' inverted={!fixed}>
@@ -85,8 +83,7 @@ const DesktopContainer = (props) => {
                   </Button>
                 }
                 <Button as={NavLink} to='/ostoskori' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
-                  <i aria-hidden="true" className="shopping basket icon"></i> Ostoskori
-
+                  <i aria-hidden='true' className='shopping basket icon'></i> Ostoskori
                 </Button>
               </Menu.Item>
 
@@ -144,9 +141,14 @@ const MobileContainer = (props) => {
                 <Icon name='sidebar' />
               </Menu.Item>
               <Menu.Item position='right'>
-                <Button as={NavLink} to='/kirjaudu' inverted>
-                Kirjaudu
-                </Button>
+                {props.loggeduser.username ?
+                  <Button as={NavLink} to='/yllapito' inverted>
+                    Ylläpito
+                  </Button> :
+                  <Button as={NavLink} to='/kirjaudu' inverted>
+                    Kirjaudu
+                  </Button>
+                }
                 <Button as={NavLink} to='/ostoskori' inverted style={{ marginLeft: '0.5em' }}>
                   <i aria-hidden="true" className="shopping basket icon"></i> Ostoskori
                 </Button>
@@ -166,12 +168,16 @@ MobileContainer.propTypes = {
 }
 
 const ResponsiveContainer = (props) => {
-  const pagePath = props.match.path
   const loggeduser = props.loggeduser
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return(
     <div>
-      <DesktopContainer pagePath={pagePath} loggeduser={loggeduser}>{props.children}</DesktopContainer>
-      <MobileContainer pagePath={pagePath} loggeduser={loggeduser}>{props.children}</MobileContainer>
+      <DesktopContainer loggeduser={loggeduser}>{props.children}</DesktopContainer>
+      <MobileContainer loggeduser={loggeduser}>{props.children}</MobileContainer>
     </div>
   )
 }
