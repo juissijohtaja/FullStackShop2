@@ -33,8 +33,8 @@ Käyttöohjeet:
 7 Mene kirjautumissivulle 
 - https://fullstackshop.firebaseapp.com/kirjaudu
 - Täytä kenttiin sivulla näkyvät tunnukset (myös esitäytetty)
--- Voit myös halutessasi luoda omat tunnukset ja kirjautua ylläpitoon niillä
--- https://fullstackshop.firebaseapp.com/rekisteroidy
+  - Voit myös halutessasi luoda omat tunnukset ja kirjautua ylläpitoon niillä
+  - https://fullstackshop.firebaseapp.com/rekisteroidy
 - Klikkaa Kirjaudu sisään -nappia
 
 8 Mene ylläpitosivun Tuotteet-välilehdelle
