@@ -58,7 +58,7 @@ Käyttöohjeet:
 
 12 Kirjaudu ulos klikkaamalla ylläpitosivun ylälaidassa olevaa napista "Kirjaudu ulos"
 - sivu siirtyy kirjautumissivulle
-- kokeile kirjautua virheelisillä tunnuksilla, tulee virheilmoitus
+- kokeile kirjautua virheellisillä tunnuksilla, ei onnistu
 
 
 
