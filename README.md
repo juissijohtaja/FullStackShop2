@@ -35,19 +35,20 @@ Käyttöohjeet:
 - Täytä kenttiin sivulla näkyvät tunnukset (myös esitäytetty)
   - Voit myös halutessasi luoda omat tunnukset ja kirjautua ylläpitoon niillä
   - https://fullstackshop.firebaseapp.com/rekisteroidy
-- Klikkaa Kirjaudu sisään -nappia
 
-8 Mene ylläpitosivun Tuotteet-välilehdelle
+8 Klikkaa Kirjaudu sisään -nappia
+
+9 Mene ylläpitosivun Tuotteet-välilehdelle
 - https://fullstackshop.firebaseapp.com/yllapito
 - Selaile kaikkia tuotteita
 - Huom. nain pääkäyttäjä voi poistaa tuotteita
 
-9 Klikkaa Lisää tuote -välilehteä
+10 Klikkaa Lisää tuote -välilehteä
 - Täytä vomakkeen tiedot
 - Kun tiedot on täytetty oikein, lomakkeen tila muuttuu
 - Huom. vain pääkäyttäjä voi lisätä tuotteita
 
-10 Klikkaa Tilaukset-välilehteä
+11 Klikkaa Tilaukset-välilehteä
 - Selaile tehtyjä tilauksia
 - Jos teit tilauksen vaiheessa 6, sen pitäisi näkyä tällä sivulla
 - Etsi tekemäsi tilaus, sen tila on "Käsittelyssä"
@@ -55,7 +56,7 @@ Käyttöohjeet:
 - Kun tilauksen tila on "Lähetetty", sen voi poistaa klikkaaalla nappia "Poista tilaus"
 - Poista tekemäsi tilaus
 
-11 Kirjaudu ulos klikkaamalla ylläpitosivun ylälaidassa olevaa napista "Kirjaudu ulos"
+12 Kirjaudu ulos klikkaamalla ylläpitosivun ylälaidassa olevaa napista "Kirjaudu ulos"
 - sivu siirtyy kirjautumissivulle
 - kokeile kirjautua virheelisillä tunnuksilla, tulee virheilmoitus
 
