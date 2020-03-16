@@ -8,6 +8,7 @@ https://docs.google.com/spreadsheets/d/10v7fwnziUzUEhIcxzUsMLEZp7PCKzS8y14R1sTww
 
 Käyttöohjeet:
 1 Mene sivustolle
+- sivusto toimii responsiivisesti, joten kokeile sivustoa eri päätelaitteilla tai muuta selainikkunan kokoa
 - https://fullstackshop.firebaseapp.com/
 
 2 Voit selata sivustoa navigaation avulla tai selailemalla tuotteita
