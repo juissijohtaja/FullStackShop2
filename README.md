@@ -16,8 +16,8 @@ Käyttöohjeet:
 3 Avaa jokin tuotesivu
 - https://fullstackshop.firebaseapp.com/tuotteet/pentax-spotmatic
 - Suurenna kuva
-- Klikkaa tagia
 - Lisää tuote ostoskoriin
+- Klikkaa tagia
 
 4 Lisää yksi tai useampi tuote ostoskoriin
 
@@ -33,6 +33,8 @@ Käyttöohjeet:
 7 Mene kirjautumissivulle 
 - https://fullstackshop.firebaseapp.com/kirjaudu
 - Täytä kenttiin sivulla näkyvät tunnukset (myös esitäytetty)
+-- Voit myös halutessasi luoda omat tunnukset ja kirjautua ylläpitoon niillä
+-- https://fullstackshop.firebaseapp.com/rekisteroidy
 - Klikkaa Kirjaudu sisään -nappia
 
 8 Mene ylläpitosivun Tuotteet-välilehdelle
@@ -57,8 +59,6 @@ Käyttöohjeet:
 - sivu siirtyy kirjautumissivulle
 - kokeile kirjautua virheelisillä tunnuksilla, tulee virheilmoitus
 
-12 Voit myös halutessasi luoda omat tunnukset ja kirjautua ylläpitoon niillä
-- https://fullstackshop.firebaseapp.com/rekisteroidy
 
 
 
