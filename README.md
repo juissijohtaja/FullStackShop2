@@ -31,6 +31,8 @@ Käyttöohjeet:
 - https://fullstackshop.firebaseapp.com/ostoskori
 - Tilaus tallentuu ja ostoskori tyhjenee
 
+HUOM. alla annetuilla tai itse luoduilla tunnuksilla ei voi lisätä eikä poistaa tuotteita tai muutenkaan "hajottaa" mitään sivostolla, joten ylläpitoa voi testailla rauhassa
+
 7 Mene kirjautumissivulle 
 - https://fullstackshop.firebaseapp.com/kirjaudu
 - Täytä kenttiin seuraavat tunnukset (myös esitäytetty):
@@ -39,17 +41,15 @@ Käyttöohjeet:
 - Klikkaa Kirjaudu sisään -nappia  
 
 8 Voit myös halutessasi luoda omat tunnukset ja kirjautua ylläpitoon niillä
-  - https://fullstackshop.firebaseapp.com/rekisteroidy
+- https://fullstackshop.firebaseapp.com/rekisteroidy
 
 9 Mene ylläpitosivun Tuotteet-välilehdelle
 - https://fullstackshop.firebaseapp.com/yllapito
 - Selaile kaikkia tuotteita
-- Huom. nain pääkäyttäjä voi poistaa tuotteita
 
 10 Klikkaa Lisää tuote -välilehteä
 - Täytä vomakkeen tiedot
 - Kun tiedot on täytetty oikein, lomakkeen tila muuttuu
-- Huom. vain pääkäyttäjä voi lisätä tuotteita
 
 11 Klikkaa Tilaukset-välilehteä
 - Selaile tehtyjä tilauksia
