@@ -33,11 +33,13 @@ Käyttöohjeet:
 
 7 Mene kirjautumissivulle 
 - https://fullstackshop.firebaseapp.com/kirjaudu
-- Täytä kenttiin sivulla näkyvät tunnukset (myös esitäytetty)
-  - Voit myös halutessasi luoda omat tunnukset ja kirjautua ylläpitoon niillä
-  - https://fullstackshop.firebaseapp.com/rekisteroidy
+- Täytä kenttiin seuraavat tunnukset (myös esitäytetty):
+  - sähköpostiosoite: admin@admin.fi
+  - salasana: admin123
+- Klikkaa Kirjaudu sisään -nappia  
 
-8 Klikkaa Kirjaudu sisään -nappia
+8 Voit myös halutessasi luoda omat tunnukset ja kirjautua ylläpitoon niillä
+  - https://fullstackshop.firebaseapp.com/rekisteroidy
 
 9 Mene ylläpitosivun Tuotteet-välilehdelle
 - https://fullstackshop.firebaseapp.com/yllapito
