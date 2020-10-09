@@ -12,10 +12,6 @@ Sivuston kehittämisessä käytettyjä ohjelmistoja ja työkaluja ovat olleet mm
 
 [FullStackShop (Firebase)](https://fullstackshop.firebaseapp.com/)
 
-### Tuntikirjanpito
-
-[Tuntikirjanpito (Google Docs)](https://docs.google.com/spreadsheets/d/10v7fwnziUzUEhIcxzUsMLEZp7PCKzS8y14R1sTwwY_0/edit?usp=sharing)
-
 ### Käyttöohjeet
 
 [Käyttöohjeet](docs/kayttoohje.md)
