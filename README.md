@@ -1,6 +1,6 @@
 # Full Stack Websovelluskehitys - Harjoitustyö
 
-
+![FullStackShop Design](docs/FullStackShop-design.jpg)
 
 Harjoitustyönä on toteutettu kuvitteellinen verkkokauppa ja sen ylläpitopuoli. Sivustolla on näkyvillä erilaisia tuotteita, joita asiakas voi listätä ostoskoriin ja tehdä tilauksen. Ylläpitoon voi kirjautua ja hallinnoida tuotteita sekä tilauksia.
 
