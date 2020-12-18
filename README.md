@@ -1,4 +1,4 @@
-# Full Stack Websovelluskehitys - Harjoitustyö - React JS
+# Full Stack Websovelluskehitys - Harjoitustyö - React JS, Redux, Firebase, Semantic UI
 
 ![FullStackShop Design](docs/FullStackShop-design.jpg)
 
